@@ -1,4 +1,4 @@
-package org.jinilover.optics
+package org.jinilover.tedious
 
 case class City(name: String, area: Double, population: Double)
 
