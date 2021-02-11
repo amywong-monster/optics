@@ -1,17 +1,17 @@
 package org.jinilover.optics.useannotation
 
-import monocle.macros._
-
-@Lenses
-case class Street(number: Int, name: String)
-@Lenses
-case class Address(city: String, street: Street)
-@Lenses
-case class Company(name: String, address: Address)
-@Lenses
-case class Employee(name: String, company: Company)
-
 object EmployeeFuncs {
+  import monocle.macros._
+
+  @Lenses
+  case class Street(number: Int, name: String)
+  @Lenses
+  case class Address(city: String, street: Street)
+  @Lenses
+  case class Company(name: String, address: Address)
+  @Lenses
+  case class Employee(name: String, company: Company)
+
   def capitaliseStreetName(origEmployee: Employee): Employee =
     Employee.company.composeLens(Company.address).composeLens(Address.street).composeLens(Street.name).modify(_.capitalize)(origEmployee)
 

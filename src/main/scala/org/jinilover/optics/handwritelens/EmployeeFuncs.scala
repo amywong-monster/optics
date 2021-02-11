@@ -1,11 +1,11 @@
 package org.jinilover.optics.handwritelens
 
-case class Street(number: Int, name: String)
-case class Address(city: String, street: Street)
-case class Company(name: String, address: Address)
-case class Employee(name: String, company: Company)
-
 object EmployeeFuncs {
+  case class Street(number: Int, name: String)
+  case class Address(city: String, street: Street)
+  case class Company(name: String, address: Address)
+  case class Employee(name: String, company: Company)
+
   import monocle.Lens
   import monocle.macros.GenLens
 
