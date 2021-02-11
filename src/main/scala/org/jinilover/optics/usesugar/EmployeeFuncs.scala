@@ -1,4 +1,4 @@
-package org.jinilover.optics.sugar
+package org.jinilover.optics.usesugar
 
 case class Street(number: Int, name: String)
 case class Address(city: String, street: Street)

@@ -1,4 +1,4 @@
-package org.jinilover.optics.annotation
+package org.jinilover.optics.useannotation
 
 import monocle.macros._
 
@@ -20,4 +20,16 @@ object EmployeeFuncs {
 
   def updateStreetNum(origEmployee: Employee, newStreetNum: Int): Employee =
     Employee.company.composeLens(Company.address).composeLens(Address.street).composeLens(Street.number).set(newStreetNum)(origEmployee)
+
+  def seriesUpdate(origEmployee: Employee, newStreetNum: Int, newCompanyName: String): Employee = {
+    val employee2 = Employee.company.composeLens(Company.address).composeLens(Address.street).composeLens(Street.number).set(newStreetNum)(origEmployee)
+    Employee.company.composeLens(Company.name).set(newCompanyName)(employee2)
+
+    // alternatively can be written as
+//    (
+//      Employee.company.composeLens(Company.address).composeLens(Address.street).composeLens(Street.number).set(newStreetNum)
+//      andThen Employee.company.composeLens(Company.name).set(newCompanyName)
+//      )(origEmployee)
+  }
+
 }
