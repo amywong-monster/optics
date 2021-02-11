@@ -1,4 +1,4 @@
-package org.jinilover.optics.writtenlens
+package org.jinilover.optics.handwritelens
 
 case class Street(number: Int, name: String)
 case class Address(city: String, street: Street)
@@ -15,6 +15,7 @@ object EmployeeFuncs {
   val streetNameL: Lens[Street  , String]  = GenLens[Street](_.name)
   val streetNumL : Lens[Street, Int] = GenLens[Street](_.number)
 
+  // e.g. `Employee("john", Company("awesome inc", Address("london", Street(23, "high street"))))`
   def capitaliseStreetName(origEmployee: Employee): Employee =
     companyL.composeLens(addressL).composeLens(streetL).composeLens(streetNameL).modify(_.capitalize)(origEmployee)
 

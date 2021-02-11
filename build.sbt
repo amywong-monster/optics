@@ -4,11 +4,13 @@ version := "0.1"
 
 scalaVersion := "2.13.4"
 
+val monocleVersion = "2.0.3"
+
 //according to https://www.optics.dev/Monocle/
 libraryDependencies ++= Seq(
-  "com.github.julien-truffaut" %% "monocle-core"  % "2.0.3",
-  "com.github.julien-truffaut" %% "monocle-macro" % "2.0.3",
+  "com.github.julien-truffaut" %% "monocle-core"  % monocleVersion,
+  "com.github.julien-truffaut" %% "monocle-macro" % monocleVersion,
 )
 
-////TODO comment
-//scalacOptions in Global += "-Ymacro-annotations"
+// `-Ymacro-annotations` is required only when using annotation such as `@Lenses`
+scalacOptions in Global += "-Ymacro-annotations"
