@@ -8,9 +8,8 @@ case class Employee(name: String, company: Company)
 object EmployeeFuncs {
   import monocle.macros.syntax.lens._
 
-  def chainUpdate(origEmployee: Employee, newStreetName: String, newStreetNum: Int): Employee = {
+  def seriesUpdate(origEmployee: Employee, newStreetName: String, newCompanyName: String): Employee =
     origEmployee
-      .lens(_.company.address.street.name).set(newStreetName)
-      .lens(_.company.address.street.number).set(newStreetNum)
-  }
+      .lens(_.company.address.street.name).set(newStreetName) // `_.company.address.street.name` is the same as `v => v.company.address.street.name`
+      .lens(_.company.name).set(newCompanyName)
 }
