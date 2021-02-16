@@ -34,5 +34,15 @@ object EmployeeFuncs {
   def updateUkStreetNumb(origEmployee: Employee, newStreetNum: Int): Employee =
     Employee.company.composeLens(Company.address).composePrism(ukAddressP).composeLens(UkAddress.street).composeLens(Street.number).set(newStreetNum)(origEmployee)
 
+  def getAusPostcode(origEmployee: Employee): Option[Int] =
+    Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.postcode).getOption(origEmployee)
+
+  import monocle.syntax.all._
+  def seriesUpdateAusAddress(origEmployee: Employee, newStreetNum: Int, newState: String): Employee = {
+    val employeeToAusAddrP = Employee.company.composeLens(Company.address).composePrism(ausAddressP)
+    origEmployee
+      .applyOptional(employeeToAusAddrP.composeLens(AusAddress.street).composeLens(Street.number)).set(newStreetNum)
+      .applyOptional(employeeToAusAddrP.composeLens(AusAddress.state)).set(newState)
+  }
 
 }
