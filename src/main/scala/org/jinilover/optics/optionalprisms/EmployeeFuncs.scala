@@ -17,5 +17,6 @@ object EmployeeFuncs {
   @Lenses
   case class Employee(name: String, company: Company)
 
-  // It needs a mix of `Optional` or `Prism` to update/modify the fields
+  // TODO
+  // try using the previous example to figure out how to modify/update the `Street` fields of an employee working in Australia
 }
