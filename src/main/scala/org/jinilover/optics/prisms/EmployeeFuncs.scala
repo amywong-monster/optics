@@ -1,4 +1,4 @@
-package org.jinilover.optics.handwriteprisms
+package org.jinilover.optics.prisms
 
 object EmployeeFuncs {
   import monocle.macros.Lenses
@@ -38,11 +38,10 @@ object EmployeeFuncs {
     Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.postcode).getOption(origEmployee)
 
   import monocle.syntax.all._
-  def seriesUpdateAusAddress(origEmployee: Employee, newStreetNum: Int, newState: String): Employee = {
-    val employeeToAusAddrP = Employee.company.composeLens(Company.address).composePrism(ausAddressP)
+  def seriesUpdate(origEmployee: Employee, newStreetNum: Int, newState: String, newCompanyName: String): Employee =
     origEmployee
-      .applyOptional(employeeToAusAddrP.composeLens(AusAddress.street).composeLens(Street.number)).set(newStreetNum)
-      .applyOptional(employeeToAusAddrP.composeLens(AusAddress.state)).set(newState)
-  }
+      .applyOptional( Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.street).composeLens(Street.number) ).set(newStreetNum)
+      .applyOptional( Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.state) ).set(newState)
+      .applyLens( Employee.company.composeLens(Company.name) ).set(newCompanyName)
 
 }
