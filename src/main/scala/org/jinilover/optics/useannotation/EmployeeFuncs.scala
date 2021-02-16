@@ -1,7 +1,7 @@
 package org.jinilover.optics.useannotation
 
 object EmployeeFuncs {
-  import monocle.macros._
+  import monocle.macros.Lenses
 
   @Lenses
   case class Street(number: Int, name: String)

@@ -4,3 +4,6 @@
 * `org.jinilover.optics.handwritelens.EmployeeFuncs.scala`
 * `org.jinilover.optics.useannotation.EmployeeFuncs.scala`
 * `org.jinilover.optics.usesugar.EmployeeFuncs.scala`
+* `org.jinilover.optics.prisms.EmployeeFuncs.scala`
+* `org.jinilover.optics.optional.EmployeeFuncs.scala`
+* `org.jinilover.optics.optionalprisms.EmployeeFuncs.scala`
