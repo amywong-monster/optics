@@ -37,7 +37,7 @@ object EmployeeFuncs {
     // Note: it's the same as
     // origEmployee.applyOptional(Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.state)).modify(_.capitalize)
 
-  def updateUkStreetNumb(origEmployee: Employee, newStreetNum: Int): Employee =
+  def updateUkStreetNumber(origEmployee: Employee, newStreetNum: Int): Employee =
     Employee.company.composeLens(Company.address).composePrism(ukAddressP).composeLens(UkAddress.street).composeLens(Street.number).set(newStreetNum)(origEmployee)
     // Note: it's the same as
     // origEmployee.applyOptional(Employee.company.composeLens(Company.address).composePrism(ukAddressP).composeLens(UkAddress.street).composeLens(Street.number)).set(newStreetNum)
