@@ -36,25 +36,25 @@ object TraversalFuncs {
 
   // redistribute contributedAmount of EACH Contribution in the Contribution list of Bill
   // e.g. try origCity = City("sydney", List(District("wynyard", CategoryFund("art&culture", 300, 500)), District("surry hills", CategoryFund("health", 400, 600)) ))
-  // reDistributeMaxAmountsOfCity(origCity, 2200)
-  def reDistributeContributionAmountsOfBill(origBill: Bill, newTotalContributedAmount: Long): Bill = {
-    val newContributions = reDistributeValues(newTotalContributedAmount, Contribution.contributedAmount, origBill.contributions)
+  // redistributeMaxAmountsOfCity(origCity, 2200)
+  def redistributeContributionAmountsOfBill(origBill: Bill, newTotalContributedAmount: Long): Bill = {
+    val newContributions = redistributeValues(newTotalContributedAmount, Contribution.contributedAmount, origBill.contributions)
     origBill.copy(contributions = newContributions)
   }
 
   // redistribute maxAmount of CategoryFund of EACH District in the District list of City by the input value
-  def reDistributeMaxAmountsOfCity(origCity: City, newTotalMaxAmount: Long): City = {
-    val newDistricts = reDistributeValues(newTotalMaxAmount, District.categoryFund.composeLens(CategoryFund.maxAmount), origCity.districts)
+  def redistributeMaxAmountsOfCity(origCity: City, newTotalMaxAmount: Long): City = {
+    val newDistricts = redistributeValues(newTotalMaxAmount, District.categoryFund.composeLens(CategoryFund.maxAmount), origCity.districts)
     origCity.copy(districts = newDistricts)
   }
 
   import monocle.Lens
 
-  // e.g. reDistributeLongs(List(1,2,3), 60) = List(10,20,30)
-  def reDistributeLongs(longs: List[Long], newTotalValue: Long): List[Long] =
-    reDistributeValues(newTotalValue, Lens.id[Long], longs)
+  // e.g. redistributeLongs(List(1,2,3), 60) = List(10,20,30)
+  def redistributeLongs(longs: List[Long], newTotalValue: Long): List[Long] =
+    redistributeValues(newTotalValue, Lens.id[Long], longs)
 
-  private def reDistributeValues[A](newTotalValue: Long, theLens: Lens[A, Long], origItems: List[A]): List[A] = {
+  private def redistributeValues[A](newTotalValue: Long, theLens: Lens[A, Long], origItems: List[A]): List[A] = {
     val origTotalValue = origItems.applyTraversal(each[A].composeLens(theLens)).getAll.sum
 
     if (newTotalValue == origTotalValue)
