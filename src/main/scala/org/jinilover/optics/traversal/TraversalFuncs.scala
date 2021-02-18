@@ -35,14 +35,14 @@ object TraversalFuncs {
     }.set(newMaxAmount)
 
   // redistribute contributedAmount of EACH Contribution in the Contribution list of Bill
-  // e.g. try origCity = City("sydney", List(District("wynyard", CategoryFund("art&culture", 300, 500)), District("surry hills", CategoryFund("health", 400, 600)) ))
-  // redistributeMaxAmountsOfCity(origCity, 2200)
   def redistributeContributionAmountsOfBill(origBill: Bill, newTotalContributedAmount: Long): Bill = {
     val newContributions = redistributeValues(newTotalContributedAmount, Contribution.contributedAmount, origBill.contributions)
     origBill.copy(contributions = newContributions)
   }
 
   // redistribute maxAmount of CategoryFund of EACH District in the District list of City by the input value
+  // e.g. try origCity = City("sydney", List(District("wynyard", CategoryFund("art&culture", 300, 500)), District("surry hills", CategoryFund("health", 400, 600)) ))
+  // redistributeMaxAmountsOfCity(origCity, 2200)
   def redistributeMaxAmountsOfCity(origCity: City, newTotalMaxAmount: Long): City = {
     val newDistricts = redistributeValues(newTotalMaxAmount, District.categoryFund.composeLens(CategoryFund.maxAmount), origCity.districts)
     origCity.copy(districts = newDistricts)
