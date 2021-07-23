@@ -18,5 +18,6 @@ object EmployeeFuncs {
   case class Employee(name: String, company: Company)
 
   // TODO
-  // try using the previous example to figure out how to modify/update the `Street` fields of an employee working in Australia
+  // try using the previous example to figure out how to modify/update the `Street` fields of an employee
+  // working in Australia
 }

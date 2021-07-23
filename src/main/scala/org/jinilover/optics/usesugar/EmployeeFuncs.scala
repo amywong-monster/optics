@@ -10,6 +10,8 @@ object EmployeeFuncs {
 
   def seriesUpdate(origEmployee: Employee, newStreetName: String, newCompanyName: String): Employee =
     origEmployee
-      .lens(_.company.address.street.name).set(newStreetName) // `_.company.address.street.name` is the same as `v => v.company.address.street.name`
-      .lens(_.company.name).set(newCompanyName)
+      .lens(_.company.address.street.name)
+      .set(newStreetName) // `_.company.address.street.name` is the same as `v => v.company.address.street.name`
+      .lens(_.company.name)
+      .set(newCompanyName)
 }

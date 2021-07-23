@@ -16,5 +16,9 @@ object EmployeeFuncs {
   val addressOpt = Optional[Company, Address](_.address)(addr => _.copy(address = Some(addr)))
 
   def capitaliseStreetName(origEmployee: Employee): Employee =
-    Employee.company.composeOptional(addressOpt).composeLens(Address.street).composeLens(Street.name).modify(_.capitalize)(origEmployee)
+    Employee.company
+      .composeOptional(addressOpt)
+      .composeLens(Address.street)
+      .composeLens(Street.name)
+      .modify(_.capitalize)(origEmployee)
 }
