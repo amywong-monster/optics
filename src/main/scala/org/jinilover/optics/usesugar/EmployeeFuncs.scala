@@ -1,17 +1,26 @@
 package org.jinilover.optics.usesugar
 
 object EmployeeFuncs {
-  case class Street(number: Int, name: String)
-  case class Address(city: String, street: Street)
-  case class Company(name: String, address: Address)
-  case class Employee(name: String, company: Company)
+  final case class Street(number: Int, name: String)
+  final case class Address(city: String, street: Street)
+  final case class Company(name: String, address: Address)
+  final case class Employee(name: String, company: Company)
 
   import monocle.macros.syntax.lens._
 
-  def seriesUpdate(origEmployee: Employee, newStreetName: String, newCompanyName: String): Employee =
+  def capitaliseStreetName(origEmployee: Employee): Employee =
+    origEmployee.lens(_.company.address.street.name).modify(_.capitalize)
+
+  def updateStreetName(origEmployee: Employee, newStreetName: String): Employee =
+    origEmployee.lens(_.company.address.street.name).set(newStreetName)
+
+  def updateStreetNum(origEmployee: Employee, newStreetNum: Int): Employee =
+    origEmployee.lens(_.company.address.street.number).set(newStreetNum)
+
+  def updateStreetNameAndNum(origEmployee: Employee, newStreetName: String, newStreetNum: Int): Employee =
     origEmployee
       .lens(_.company.address.street.name)
-      .set(newStreetName) // `_.company.address.street.name` is the same as `v => v.company.address.street.name`
-      .lens(_.company.name)
-      .set(newCompanyName)
+      .set(newStreetName)
+      .lens(_.company.address.street.number)
+      .set(newStreetNum)
 }

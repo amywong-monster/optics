@@ -4,18 +4,18 @@ object EmployeeFuncs {
   import monocle.macros.Lenses
 
   @Lenses
-  case class Street(number: Int, name: String)
+  final case class Street(number: Int, name: String)
   // start of Address ADT
   sealed trait Address
   @Lenses
-  case class UkAddress(postTown: String, postcode: String, street: Street) extends Address
+  final case class UkAddress(postTown: String, postcode: String, street: Street) extends Address
   @Lenses
-  case class AusAddress(state: String, postcode: Int, street: Street) extends Address
+  final case class AusAddress(state: String, postcode: Int, street: Street) extends Address
   // end of Address ADT
   @Lenses
-  case class Company(name: String, address: Address)
+  final case class Company(name: String, address: Address)
   @Lenses
-  case class Employee(name: String, company: Company)
+  final case class Employee(name: String, company: Company)
 
   import monocle.Prism
   import monocle.macros.GenPrism

@@ -4,15 +4,15 @@ object TraversalFuncs {
   import monocle.macros.Lenses
 
   @Lenses
-  case class CategoryFund(category: String, defaultAmount: Long, maxAmount: Long)
+  final case class CategoryFund(category: String, defaultAmount: Long, maxAmount: Long)
   @Lenses
-  case class District(districtName: String, categoryFund: CategoryFund)
+  final case class District(districtName: String, categoryFund: CategoryFund)
   @Lenses
-  case class City(cityName: String, districts: List[District])
+  final case class City(cityName: String, districts: List[District])
   @Lenses
-  case class Contribution(districtName: String, contributedAmount: Long)
+  final case class Contribution(districtName: String, contributedAmount: Long)
   @Lenses
-  case class Bill(billName: String, contributions: List[Contribution])
+  final case class Bill(billName: String, contributions: List[Contribution])
 
   import monocle.Traversal
   // `Traversal.fromTraverse` implementation requires the first argument to be a `Traverse` type class

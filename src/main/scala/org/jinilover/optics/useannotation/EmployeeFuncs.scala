@@ -4,13 +4,13 @@ object EmployeeFuncs {
   import monocle.macros.Lenses
 
   @Lenses
-  case class Street(number: Int, name: String)
+  final case class Street(number: Int, name: String)
   @Lenses
-  case class Address(city: String, street: Street)
+  final case class Address(city: String, street: Street)
   @Lenses
-  case class Company(name: String, address: Address)
+  final case class Company(name: String, address: Address)
   @Lenses
-  case class Employee(name: String, company: Company)
+  final case class Employee(name: String, company: Company)
 
   def capitaliseStreetName(origEmployee: Employee): Employee =
     Employee.company
