@@ -1,4 +1,4 @@
-package org.jinilover.tedious
+package org.jinilover.usecopy
 
 final case class Street(number: Int, name: String)
 final case class Address(city: String, street: Street)

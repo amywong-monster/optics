@@ -1,4 +1,4 @@
-package org.jinilover.tedious
+package org.jinilover.usecopy
 
 final case class City(name: String, area: Double, population: Double)
 
