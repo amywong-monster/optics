@@ -4,7 +4,7 @@ version := "0.1"
 
 scalaVersion := "2.13.4"
 
-val monocleVersion = "2.0.3"
+val monocleVersion = "2.1.0"
 
 //according to https://www.optics.dev/Monocle/
 libraryDependencies ++= Seq(
