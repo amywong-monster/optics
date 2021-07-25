@@ -33,13 +33,17 @@ object EmployeeFuncs {
       .composeLens(Street.number)
       .set(newStreetNum)(origEmployee)
 
-  def seriesUpdate(origEmployee: Employee, newStreetNum: Int, newCompanyName: String): Employee = {
+  def updateStreetNameAndNum(origEmployee: Employee, newStreetName: String, newStreetNum: Int): Employee = {
     val employee2 = Employee.company
       .composeLens(Company.address)
       .composeLens(Address.street)
+      .composeLens(Street.name)
+      .set(newStreetName)(origEmployee)
+    Employee.company
+      .composeLens(Company.address)
+      .composeLens(Address.street)
       .composeLens(Street.number)
-      .set(newStreetNum)(origEmployee)
-    Employee.company.composeLens(Company.name).set(newCompanyName)(employee2)
+      .set(newStreetNum)(employee2)
 
     // alternatively can be written as
 //    (
