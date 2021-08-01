@@ -52,16 +52,20 @@ object EmployeeFuncs {
   // origEmployee.applyOptional(Employee.company.composeLens(Company.address).composePrism(ukAddressP).composeLens(UkAddress.street).composeLens(Street.number)).set(newStreetNum)
 
   def getAusPostcode(origEmployee: Employee): Option[Int] =
-// Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.postcode).getOption(origEmployee)
-    // Note: it's the same as
-    origEmployee
-      .applyOptional(
-        Employee.company
-          .composeLens(Company.address)
-          .composePrism(ausAddressP)
-          .composeLens(AusAddress.postcode)
-      )
-      .getOption
+    Employee.company
+      .composeLens(Company.address)
+      .composePrism(ausAddressP)
+      .composeLens(AusAddress.postcode)
+      .getOption(origEmployee)
+  // Note: it's the same as
+//    origEmployee
+//      .applyOptional(
+//        Employee.company
+//          .composeLens(Company.address)
+//          .composePrism(ausAddressP)
+//          .composeLens(AusAddress.postcode)
+//      )
+//      .getOption
 
   def seriesUpdate(
     origEmployee: Employee,
