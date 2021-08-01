@@ -21,4 +21,9 @@ object EmployeeFuncs {
       .composeLens(Address.street)
       .composeLens(Street.name)
       .modify(_.capitalize)(origEmployee)
+
+  import monocle.syntax.all._
+
+  def capitaliseStreetName_bySugar(origEmployee: Employee): Employee =
+    ???
 }
