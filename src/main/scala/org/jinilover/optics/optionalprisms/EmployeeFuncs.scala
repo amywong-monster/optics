@@ -18,6 +18,9 @@ object EmployeeFuncs {
   final case class Employee(name: String, company: Company)
 
   // TODO
-  // try using the previous example to figure out how to modify/update the `Street` fields of an employee
+  // try using the previous example to figure out how to update the `Street number` of an employee
   // working in Australia
+  import monocle.syntax.all._
+  def updateAusStreetNum(origEmployee: Employee, newStreetNum: Int): Employee =
+    ???
 }
