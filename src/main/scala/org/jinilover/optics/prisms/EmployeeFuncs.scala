@@ -28,18 +28,12 @@ object EmployeeFuncs {
   // Employee("john", Company("monster", UkAddress("london", "w5 5yz", Street(83, "clarence street"))))
   // in the following functions
 
-  // Note: providing syntax sugar
-  // such that it can call `applyOptional` or `applyLens` or `applyPrism` ... on `origEmployee`
-  import monocle.syntax.all._
-
   def capitaliseAusState(origEmployee: Employee): Employee =
     Employee.company
       .composeLens(Company.address)
       .composePrism(ausAddressP)
       .composeLens(AusAddress.state)
       .modify(_.capitalize)(origEmployee)
-  // Note: it's the same as
-  // origEmployee.applyOptional(Employee.company.composeLens(Company.address).composePrism(ausAddressP).composeLens(AusAddress.state)).modify(_.capitalize)
 
   def updateUkStreetNumber(origEmployee: Employee, newStreetNum: Int): Employee =
     Employee.company
@@ -48,8 +42,6 @@ object EmployeeFuncs {
       .composeLens(UkAddress.street)
       .composeLens(Street.number)
       .set(newStreetNum)(origEmployee)
-  // Note: it's the same as
-  // origEmployee.applyOptional(Employee.company.composeLens(Company.address).composePrism(ukAddressP).composeLens(UkAddress.street).composeLens(Street.number)).set(newStreetNum)
 
   def getAusPostcode(origEmployee: Employee): Option[Int] =
     Employee.company
@@ -57,15 +49,36 @@ object EmployeeFuncs {
       .composePrism(ausAddressP)
       .composeLens(AusAddress.postcode)
       .getOption(origEmployee)
-  // Note: it's the same as
-//    origEmployee
-//      .applyOptional(
-//        Employee.company
-//          .composeLens(Company.address)
-//          .composePrism(ausAddressP)
-//          .composeLens(AusAddress.postcode)
-//      )
-//      .getOption
+
+  // the following functions require syntactic sugar
+  import monocle.syntax.all._
+
+  def capitaliseAusState_bySugar(origEmployee: Employee): Employee =
+    origEmployee
+      .applyOptional(
+        Employee.company
+          .composeLens(Company.address)
+          .composePrism(ausAddressP)
+          .composeLens(AusAddress.state)
+      )
+      .modify(_.capitalize)
+
+  def updateUkStreetNumber_bySugar(origEmployee: Employee, newStreetNum: Int): Employee =
+    origEmployee.applyOptional(
+      Employee.company
+        .composeLens(Company.address)
+        .composePrism(ukAddressP)
+        .composeLens(UkAddress.street)
+        .composeLens(Street.number)
+    ).set(newStreetNum)
+
+  def getAusPostcode_bySugar(origEmployee: Employee): Option[Int] =
+    origEmployee.applyOptional(
+      Employee.company
+        .composeLens(Company.address)
+        .composePrism(ausAddressP)
+        .composeLens(AusAddress.postcode)
+    ).getOption
 
   def seriesUpdate(
     origEmployee: Employee,
