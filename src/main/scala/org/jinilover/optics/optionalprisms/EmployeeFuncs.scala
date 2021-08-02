@@ -1,5 +1,7 @@
 package org.jinilover.optics.optionalprisms
 
+import monocle.macros.GenPrism
+
 object EmployeeFuncs {
   import monocle.macros.Lenses
 
@@ -20,6 +22,10 @@ object EmployeeFuncs {
   // TODO
   // try using the previous example to figure out how to update the `Street number` of an employee
   // working in Australia
+  import monocle.Optional
+  val addressOptional = Optional[Company, Address](_.address)(addr => _.copy(address = Some(addr)))
+  val ausAddressP = GenPrism[Address, AusAddress]
+
   import monocle.syntax.all._
   def updateAusStreetNum(origEmployee: Employee, newStreetNum: Int): Employee =
     ???
