@@ -64,21 +64,25 @@ object EmployeeFuncs {
       .modify(_.capitalize)
 
   def updateUkStreetNumber_bySugar(origEmployee: Employee, newStreetNum: Int): Employee =
-    origEmployee.applyOptional(
-      Employee.company
-        .composeLens(Company.address)
-        .composePrism(ukAddressP)
-        .composeLens(UkAddress.street)
-        .composeLens(Street.number)
-    ).set(newStreetNum)
+    origEmployee
+      .applyOptional(
+        Employee.company
+          .composeLens(Company.address)
+          .composePrism(ukAddressP)
+          .composeLens(UkAddress.street)
+          .composeLens(Street.number)
+      )
+      .set(newStreetNum)
 
   def getAusPostcode_bySugar(origEmployee: Employee): Option[Int] =
-    origEmployee.applyOptional(
-      Employee.company
-        .composeLens(Company.address)
-        .composePrism(ausAddressP)
-        .composeLens(AusAddress.postcode)
-    ).getOption
+    origEmployee
+      .applyOptional(
+        Employee.company
+          .composeLens(Company.address)
+          .composePrism(ausAddressP)
+          .composeLens(AusAddress.postcode)
+      )
+      .getOption
 
   def seriesUpdate(
     origEmployee: Employee,

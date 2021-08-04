@@ -40,7 +40,7 @@ object TraversalFuncs {
     }.set(newMaxAmount)
 
   // redistribute contributedAmount of EACH Contribution in the Contribution list of Bill
-  def redistributeContributionAmountsOfBill(origBill: Bill, newTotalContributedAmount: Long): Bill = {
+  def redistribute_ContributionAmountsOfBill(origBill: Bill, newTotalContributedAmount: Long): Bill = {
     val newContributions =
       redistributeValues(newTotalContributedAmount, Contribution.contributedAmount, origBill.contributions)
     origBill.copy(contributions = newContributions)
@@ -50,7 +50,7 @@ object TraversalFuncs {
   // e.g. try origCity = City("sydney", List(District("wynyard", CategoryFund("art&culture", 300, 500)),
   // District("surry hills", CategoryFund("health", 400, 600)) ))
   // redistributeMaxAmountsOfCity(origCity, 2200)
-  def redistributeMaxAmountsOfCity(origCity: City, newTotalMaxAmount: Long): City = {
+  def redistribute_MaxAmountsOfCity(origCity: City, newTotalMaxAmount: Long): City = {
     val newDistricts = redistributeValues(
       newTotalMaxAmount,
       District.categoryFund.composeLens(CategoryFund.maxAmount),
@@ -62,7 +62,7 @@ object TraversalFuncs {
   import monocle.Lens
 
   // e.g. redistributeLongs(List(1,2,3), 60) = List(10,20,30)
-  def redistributeLongs(longs: List[Long], newTotalValue: Long): List[Long] =
+  def redistribute_Longs(longs: List[Long], newTotalValue: Long): List[Long] =
     redistributeValues(newTotalValue, Lens.id[Long], longs)
 
   private def redistributeValues[A](
