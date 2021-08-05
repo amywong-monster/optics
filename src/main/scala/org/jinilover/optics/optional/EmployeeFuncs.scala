@@ -25,5 +25,10 @@ object EmployeeFuncs {
   import monocle.syntax.all._
 
   def capitaliseStreetName_bySugar(origEmployee: Employee): Employee =
-    ???
+    origEmployee.applyOptional(
+      Employee.company
+        .composeOptional(addressOpt)
+        .composeLens(Address.street)
+        .composeLens(Street.name)
+      ).modify(_.capitalize)
 }
