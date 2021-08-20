@@ -8,3 +8,4 @@
 * `org.jinilover.optics.optional.EmployeeFuncs.scala`
 * `org.jinilover.optics.optionalprisms.EmployeeFuncs.scala`
 * `org.jinilover.optics.traversal.TraversalFuncs.scala`
+* `org.jinilover.optics.updatemap.MapFuncs.scala`
