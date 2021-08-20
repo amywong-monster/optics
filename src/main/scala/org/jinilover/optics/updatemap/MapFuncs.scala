@@ -80,7 +80,7 @@ object MapFuncs {
       .composeTraversal(each)
       .composeLens(Lens.id[Map[String, String]])
       .modify { origMap =>
-        if (piiErrorCodes.exists(piiErrorCode => origMap.get(errorCodeKey).exists(_ == piiErrorCode)))
+        if (origMap.get(errorCodeKey).exists(piiErrorCodes.contains))
           origMap.get(errorCodeKey).map(errorCodeKey -> _).toMap
         else
           origMap
